@@ -40,4 +40,12 @@ int main()
 	strDelChar.PrintStr();
 
 	cout << "\nNumber of strings created: " << MyString::getStatic();
+
+	cout << "\n" << endl;
+	MyString str4("Hello");
+	MyString result4 = str4 + 'P';
+	//str4.PrintStr();
+	result4.PrintStr();
+
+
 }

@@ -9,6 +9,7 @@ public:
 	void delNullPtr(char* pointer);
 	MyString();
 	MyString(const char* userStr);
+	MyString(const MyString& point);///
 	~MyString();
 
 	void PrintStr();
@@ -26,4 +27,12 @@ public:
 	static void incrStatic();
 	static int getStatic();
 
+	const char* GetStr();
+	friend MyString operator+(const MyString obj, const char ch);
+
+	///
+	MyString& operator=(const MyString& right);
+
 };
+//------------
+

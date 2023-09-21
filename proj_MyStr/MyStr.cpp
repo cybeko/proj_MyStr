@@ -20,6 +20,16 @@ MyString::MyString(const char* userStr)
 	}
 	incrStatic();
 }
+MyString::MyString(const MyString& point)
+{
+	length = point.length;
+	str = new char[length + 1];
+	for (int i = 0; i < length; i++)
+	{
+		str[i] = point.str[i];
+	}
+	incrStatic();
+}
 void MyString::delNullPtr(char* pointer)
 {
 	delete[] pointer;
@@ -210,4 +220,22 @@ void MyString::MyDelChr(char c)
 	delete[] str;
 	str = newStr;
 	length = newLen;
+}
+//+ ch
+MyString operator+(const MyString obj, const char ch)
+{
+	int strLen = obj.length;
+
+	char* newStr = new char[strLen + 2];
+	for (int i = 0; i < strLen -1; i++)
+	{
+		newStr[i] = obj.str[i];
+	}
+	newStr[strLen -1] = ch;
+	newStr[strLen] = '\0';
+	return MyString(newStr);
+}
+const char* MyString::GetStr()
+{
+	return str;
 }
