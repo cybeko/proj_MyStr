@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+using namespace std;
 class MyString
 {
 private:
@@ -9,7 +11,7 @@ public:
 	void delNullPtr(char* pointer);
 	MyString();
 	MyString(const char* userStr);
-	MyString(const MyString& point);///
+	MyString(const MyString& point);
 	~MyString();
 
 	void PrintStr();
@@ -27,12 +29,19 @@ public:
 	static void incrStatic();
 	static int getStatic();
 
-	const char* GetStr();
-	friend MyString operator+(const MyString obj, const char ch);
+	char* GetStr() const;
+	int GetLength() const;
 
-	///
-	MyString& operator=(const MyString& right);
+	MyString& operator++();
+	MyString& operator++(int);
 
+	MyString& operator=(const MyString& obj);
+	char& operator[](const unsigned int index);
+	void operator() ();
 };
-//------------
-
+MyString operator+(const MyString obj, const char ch);
+MyString operator+(const char ch, const MyString obj);
+MyString operator+(MyString obj, int n);
+MyString operator+(int n, MyString obj);
+ostream& operator<<(ostream& os, const MyString& obj);
+istream& operator>>(istream& is, MyString& obj);

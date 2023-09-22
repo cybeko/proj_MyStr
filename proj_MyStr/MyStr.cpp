@@ -30,6 +30,20 @@ MyString::MyString(const MyString& point)
 	}
 	incrStatic();
 }
+MyString& MyString::operator=(const MyString& obj)
+{
+	if (this != &obj)
+	{
+		delete[] str;
+		length = obj.length;
+		str = new char[length];
+		for (int i = 0; i < length; ++i)
+		{
+			str[i] = obj.str[i];
+		}
+	}
+	return *this;
+}
 void MyString::delNullPtr(char* pointer)
 {
 	delete[] pointer;
@@ -221,21 +235,136 @@ void MyString::MyDelChr(char c)
 	str = newStr;
 	length = newLen;
 }
-//+ ch
 MyString operator+(const MyString obj, const char ch)
 {
-	int strLen = obj.length;
+	int strLen = obj.GetLength();
 
 	char* newStr = new char[strLen + 2];
 	for (int i = 0; i < strLen -1; i++)
 	{
-		newStr[i] = obj.str[i];
+		newStr[i] = obj.GetStr()[i];
 	}
 	newStr[strLen -1] = ch;
 	newStr[strLen] = '\0';
 	return MyString(newStr);
 }
-const char* MyString::GetStr()
+MyString operator+(const char ch, const MyString obj)
+{
+	int strLen = obj.GetLength();
+
+	char* newStr = new char[strLen + 2];
+
+	newStr[0] = ch;
+	for (int i = 1; i <= strLen; i++)
+	{
+		newStr[i] = obj.GetStr()[i-1];
+	}
+	newStr[strLen] = '\0';
+	return MyString(newStr);
+}
+MyString operator+(MyString obj, int n)
+{
+	int oldLen = obj.GetLength();
+	char* oldStr = obj.GetStr();
+
+	int newLen = oldLen + n;
+	char* newStr = new char[newLen];
+
+	for (int i = 0; i < newLen; i++)
+	{
+		if (i < oldLen - 1)
+		{
+			newStr[i] = oldStr[i];
+		}
+		else
+		{
+			newStr[i] = '^';
+		}
+	}
+	newStr[newLen - 1] = '\0';
+	MyString tempStr(newStr);
+	return tempStr;
+}
+MyString operator+(int n, MyString obj)
+{
+	int oldLen = obj.GetLength();
+	char* oldStr = obj.GetStr();
+
+	int newLen = oldLen + n;
+	char* newStr = new char[newLen];
+	int j = 0;
+	for (int i = 0; i < newLen; i++)
+	{
+		if (i < n)
+		{
+			newStr[i] = '^';
+		}
+		else
+		{
+			newStr[i] = oldStr[j];
+			j++;
+		}
+	}
+	newStr[newLen - 1] = '\0';
+	MyString tempStr(newStr);
+	return tempStr;
+}
+char* MyString::GetStr() const
 {
 	return str;
+}
+int MyString::GetLength() const
+{
+	return length;
+}
+MyString& MyString::operator++()
+{
+	char* newStr = new char[length+1];
+	newStr[0] = '_';
+	for (int i = 0; i < length; i++)
+	{
+		newStr[i + 1] = str[i];
+	}
+	delete[] str;
+	str = newStr;
+	return *this;
+}
+MyString& MyString::operator++(int)
+{
+	char* newStr = new char[length+2];
+	for (int i = 0; i < length; i++)
+	{
+		newStr[i] = str[i];
+	}
+	newStr[length] = '_';
+	newStr[length+1] = '\0';
+	delete[] str;
+	str = newStr;
+	return *this;
+}
+ostream& operator<<(ostream& os, const MyString& obj)
+{
+	os << obj.GetStr() << endl;
+	//os << obj.GetLength() << endl;
+	return os;
+}
+istream& operator>>(istream& is, MyString& obj)
+{
+	char buff[100];
+	cin.getline(buff, sizeof(buff));
+	obj.MyStrCpy(buff);
+	return is;
+}
+char& MyString::operator[](const unsigned int id)
+{
+	if (id >= 0 && id <= length)
+	{
+		return str[id];
+	}
+	return str[0];
+}
+void MyString::operator()()
+{
+	this->InputStr();
+	this->PrintStr();
 }

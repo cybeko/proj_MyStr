@@ -6,7 +6,34 @@ unsigned int MyString::s_count = 0;
 
 int main()
 {
-	MyString str1("Hello ");
+	//2 
+	MyString str("Hello");
+	cout << str;
+
+	cout << "\nobj + 'A'" << endl;
+	str = str + 'A';
+	cout << str;
+
+	cout << "\n'A' + obj" << endl;
+	str = 'A' + str;
+	cout << str;
+
+	cout << "\n++obj" << endl;
+	++str;
+	cout << str;
+	cout << "\nobj++" << endl;
+	str++;
+	cout << str;
+
+	cout << "\n!obj + 10" << endl;
+	str = str + 10;
+	cout << str;
+
+	cout << "\n!obj + 10" << endl;
+	str = 10 + str;
+	cout << str;
+
+	/*MyString str1("Hello ");
 	MyString str2("world");
 
 	cout << "Str1: ";
@@ -39,13 +66,19 @@ int main()
 	strDelChar.MyDelChr('d');
 	strDelChar.PrintStr();
 
-	cout << "\nNumber of strings created: " << MyString::getStatic();
+	cout << "\nNumber of strings created: " << MyString::getStatic()<<endl;*/
 
-	cout << "\n" << endl;
+	/*cout << "\nobj + 'A'" << endl;
 	MyString str4("Hello");
-	MyString result4 = str4 + 'P';
-	//str4.PrintStr();
-	result4.PrintStr();
+	MyString res = str4 + 'A';
+	res.PrintStr();
 
+	cout << "\n'A' + obj" << endl;
+	MyString str5("Hello");
+	MyString res1 = 'A'+ str5;
+	res1.PrintStr();
+
+	MyString strA("Hello");
+	cout << strA ;*/
 
 }
