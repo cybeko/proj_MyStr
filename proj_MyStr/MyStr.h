@@ -35,9 +35,14 @@ public:
 	MyString& operator++();
 	MyString& operator++(int);
 
-	MyString& operator=(const MyString& obj);
 	char& operator[](const unsigned int index);
-	void operator() ();
+	void operator()();
+
+	MyString& operator=(const MyString& obj);
+
+	MyString& operator=(MyString&& point);
+	MyString(MyString&& obj);
+
 };
 MyString operator+(const MyString obj, const char ch);
 MyString operator+(const char ch, const MyString obj);

@@ -30,20 +30,6 @@ MyString::MyString(const MyString& point)
 	}
 	incrStatic();
 }
-MyString& MyString::operator=(const MyString& obj)
-{
-	if (this != &obj)
-	{
-		delete[] str;
-		length = obj.length;
-		str = new char[length];
-		for (int i = 0; i < length; ++i)
-		{
-			str[i] = obj.str[i];
-		}
-	}
-	return *this;
-}
 void MyString::delNullPtr(char* pointer)
 {
 	delete[] pointer;
@@ -367,4 +353,37 @@ void MyString::operator()()
 {
 	this->InputStr();
 	this->PrintStr();
+}
+MyString& MyString::operator=(const MyString& obj)
+{
+	if (this != &obj)
+	{
+		delete[] str;
+		length = obj.length;
+		str = new char[length];
+		for (int i = 0; i < length; ++i)
+		{
+			str[i] = obj.str[i];
+		}
+	}
+	return *this;
+}
+MyString& MyString::operator=( MyString&& obj) 
+{
+	if (this != &obj)
+	{
+		delete[] str;
+		length = obj.length;
+		str = obj.str;
+		obj.length = 0;
+		obj.str = nullptr;
+	}
+	return *this;
+}
+MyString::MyString(MyString&& obj)
+{
+	length = obj.length;
+	str = obj.str;
+	obj.length = 0;
+	obj.str = nullptr;
 }

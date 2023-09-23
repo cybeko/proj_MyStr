@@ -6,7 +6,6 @@ unsigned int MyString::s_count = 0;
 
 int main()
 {
-	//2 
 	MyString str("Hello");
 	cout << str;
 
